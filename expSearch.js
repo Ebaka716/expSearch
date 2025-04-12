@@ -139,6 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
         confidenceValue.textContent = confidence;
         // console.log(`Updating layout with confidence: ${confidence}`); // Less verbose logging
 
+        // Update the bottom-right confidence display
+        const answerCardConfidenceElement = document.getElementById('answerCardConfidence');
+        if (answerCardConfidenceElement) {
+            answerCardConfidenceElement.textContent = `Confidence: ${confidence}%`;
+        }
+
         resultsContainer.classList.remove('template-one', 'template-two', 'template-three');
         answerSection.classList.remove('low-confidence', 'medium-confidence', 'high-confidence');
 
@@ -852,10 +858,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // --- Initialize Home Page Specific Logic ---
+    const initHomePageSearch = () => {
+        const homeInput = document.getElementById('homeSearchInput');
+        if (homeInput) {
+            console.log('Initializing home page search listener');
+            homeInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    const query = homeInput.value.trim();
+                    if (query) {
+                        // Construct the URL for the results page with the query parameter
+                        const encodedQuery = encodeURIComponent(query);
+                        window.location.href = `expSearch.html?query=${encodedQuery}`;
+                    } else {
+                        // Optionally handle empty search submission on Enter, e.g., do nothing or show a message
+                        console.log("Home search input is empty, Enter key ignored.");
+                    }
+                }
+            });
+        } else {
+            // This indicates the script is likely running on expSearch.html, not index.html
+            // console.log('Home search input not found, skipping home page listener setup.'); // Optional: uncomment for debugging
+        }
+    };
+
     // --- Initialize ---
-    // These assume the script is running on expSearch.html
+    // Initialize controls and search logic. Some parts might only apply to one page,
+    // but the functions internally check for element existence.
     initControls();
     initSearch();
-    checkUrlForQuery(); // Check for query param on load
+    checkUrlForQuery(); // Checks if we are on results page with a query
+    initHomePageSearch(); // Setup listener specifically for index.html
 
 });
