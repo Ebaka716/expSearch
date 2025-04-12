@@ -1,0 +1,2247 @@
+html {
+    overflow-y: scroll; /* Always show scrollbar track to prevent layout shifts */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+}
+
+:root {
+    --primary-color: #0a8754;
+    --primary-dark: #076c43;
+    --primary-light: #e6f5ef;
+    --secondary-color: #2d3748;
+    --text-color: #1a202c;
+    --text-light: #718096;
+    --bg-color: #f8fafc;
+    --border-color: #e2e8f0;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.site-header {
+    background-color: white;
+    color: var(--primary-color);
+    box-shadow: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-top: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    transform: translateZ(0); /* Promote to own layer */
+}
+
+.header-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav li {
+    margin-left: 25px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    padding: 8px 0;
+    position: relative;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: var(--transition);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 40px 0;
+}
+
+/* Search Section Styles */
+.search-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 20px;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px 12px;
+}
+
+#homeSearchInput {
+    flex: 1;
+    padding: 14px 50px 14px 20px; /* Pad left for text, right for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 12px !important; /* Updated corner radius, added !important */
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+    background-color: white;
+}
+
+#homeSearchInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+#homeSearchButton {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#homeSearchButton:hover {
+    background-color: var(--primary-dark);
+}
+
+.attach-button {
+    background: transparent;
+    color: var(--text-light);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.attach-button:hover {
+    color: var(--primary-color);
+}
+
+/* Match icebreaker grid breakpoints */
+@media (max-width: 900px) {
+    .search-section {
+        max-width: 900px;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    .search-section {
+        max-width: 700px;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .search-section {
+        max-width: 500px;
+        padding: 0 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-section {
+        padding: 15px;
+    }
+    
+    #homeSearchInput {
+        padding: 10px 15px;
+    }
+    
+    #homeSearchButton {
+        padding: 10px 15px;
+    }
+}
+
+#searchInput {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(10, 135, 84, 0.2);
+}
+
+#searchButton {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: var(--text-light);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#searchButton:hover {
+    background-color: transparent;
+    color: var(--secondary-color);
+}
+
+.search-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.filter-btn {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Results Section Styles */
+.results-section {
+    padding: 0 0 20px 0;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.results-header h3 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.results-count {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.results-sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.results-sort label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+#sortOptions {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: white;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.result-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.result-icon {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.result-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.result-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.result-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.result-tag {
+    background-color: #f0f4f9;
+    color: var(--text-light);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* Remove star rating styles */
+.result-rating, 
+.wayfind-rating, 
+.source-rating {
+    display: none;
+}
+
+/* Adjust the wayfind-meta to look good without ratings */
+.wayfind-meta {
+    justify-content: flex-start;
+}
+
+.result-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition);
+}
+
+.result-link:hover {
+    color: var(--primary-dark);
+}
+
+.result-link i {
+    font-size: 0.8rem;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pagination-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pagination-btn:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+}
+
+.pagination-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Footer Styles - REMOVED */
+/* 
+.site-footer {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+*/
+
+/* Confidence Controls Styles */
+.confidence-controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #2d3748;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    transform: translateZ(0); /* Promote to own layer */
+}
+
+.confidence-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.confidence-slider {
+    width: 300px;
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: #4a5568;
+    outline: none;
+}
+
+.confidence-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.confidence-slider::-webkit-slider-thumb:hover {
+    background: var(--primary-dark);
+    transform: scale(1.1);
+}
+
+.confidence-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+}
+
+.confidence-value {
+    font-weight: 700;
+    min-width: 50px;
+    text-align: center;
+}
+
+.template-controls {
+    display: flex;
+    gap: 5px;
+    margin-left: 20px;
+}
+
+.template-btn {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    background-color: #4a5568;
+    color: white;
+    border: 1px solid #718096;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.template-btn:hover {
+    background-color: #718096;
+}
+
+.template-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-dark);
+}
+
+/* Search Header Area */
+.search-header-area {
+    margin-bottom: 15px;
+}
+
+.search-header-area h2 {
+    display: inline;
+    margin-right: 15px;
+}
+
+.confidence-explanation {
+    display: inline;
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+
+/* Typeahead Suggestions Styles */
+#suggestionsContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: 4px;
+    box-shadow: var(--card-shadow);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none; /* Hide by default */
+}
+
+.suggestion-item, 
+.suggestion-item-personal,
+.suggestion-item-ticker {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.suggestion-item:last-child, 
+.suggestion-item-personal:last-child, 
+.suggestion-item-ticker:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item-personal:hover,
+.suggestion-item-ticker:hover,
+.suggestion-item.active,
+.suggestion-item-personal.active,
+.suggestion-item-ticker.active {
+    background-color: var(--primary-light);
+}
+
+/* Icon Styling (Common) */
+.suggestion-item i, 
+.suggestion-item-personal i, 
+.suggestion-item-ticker i {
+    color: var(--text-light);
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-right: 0;
+}
+
+/* Specific Styling for .suggestion-item (Terms) */
+.suggestion-item .suggestion-text-wrapper {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-item mark {
+    background-color: transparent;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Specific Styling for .suggestion-item-ticker */
+.suggestion-item-ticker {
+    /* Keep display: flex; align-items: center; gap: 10px from common style */
+    /* Remove padding override if present, use common padding */
+}
+
+.suggestion-item-ticker .ticker-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    margin-left: 0;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.suggestion-item-ticker .ticker-symbol {
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.suggestion-item-ticker .ticker-name {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.suggestion-item-ticker .ticker-financials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.9rem;
+    min-width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.suggestion-item-ticker .ticker-price {
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.suggestion-item-ticker .ticker-change {
+    white-space: nowrap;
+}
+
+.suggestion-item-ticker .ticker-change.positive {
+    color: #10b981;
+}
+
+.suggestion-item-ticker .ticker-change.negative {
+    color: #ef4444;
+}
+
+/* Specific Styling for .suggestion-item-personal */
+.suggestion-item-personal {
+    /* Keep display: flex; align-items: center; gap: 10px from common style */
+}
+
+.suggestion-item-personal .personal-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.suggestion-item-personal .personal-text {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.suggestion-item-personal .personal-text mark {
+    background-color: transparent;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.suggestion-item-personal .personal-details {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-left: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-left: 10px;
+}
+
+/* Answer Feedback Styles */
+.answer-feedback {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.feedback-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 4px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.feedback-btn:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+    color: var(--primary-dark);
+}
+
+.feedback-btn i {
+    font-size: 0.9em;
+}
+
+/* Portfolio Widget Styles */
+.portfolio-widget {
+    border-left: 4px solid #4299e1;
+    background-color: #ebf8ff;
+    display: none;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.portfolio-widget.visible {
+    display: block;
+    opacity: 1;
+    max-height: 500px;
+}
+
+.portfolio-widget .section-title i {
+    color: #4299e1;
+}
+
+.portfolio-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.portfolio-metric {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+.metric-label {
+    color: var(--text-light);
+}
+
+.metric-value {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.metric-value.positive {
+    color: #10b981;
+}
+
+.metric-value.negative {
+    color: #ef4444;
+}
+
+.portfolio-link {
+    margin-top: 10px;
+    color: #4299e1;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    align-self: flex-start;
+}
+
+.portfolio-link:hover {
+    text-decoration: underline;
+}
+
+/* Adjustments for Grid Layout */
+.results-container.template-two {
+    grid-template-areas:
+        "answer conversation"
+        "portfolio conversation"
+        "wayfind conversation";
+}
+
+.results-container.template-three {
+    grid-template-areas:
+        "answer conversation"
+        "portfolio conversation";
+}
+
+#portfolioWidget {
+    grid-area: portfolio;
+}
+
+/* Responsive for portfolio */
+@media (max-width: 768px) {
+    .results-container.template-two {
+        grid-template-areas:
+            "answer"
+            "portfolio"
+            "wayfind"
+            "conversation";
+    }
+    .results-container.template-three {
+        grid-template-areas:
+            "answer"
+            "portfolio"
+            "conversation";
+    }
+}
+
+/* Multi-section Results Container - Base Layout */
+.results-container {
+    margin-top: 0;
+    transition: all 0.4s ease-in-out;
+}
+
+/* Template Layout Styles */
+.results-container.template-one,
+.results-container.template-two,
+.results-container.template-three {
+    display: grid;
+    gap: 15px;
+}
+
+/* Template One: Related Results (2/3) and Conversation (1/3) side-by-side */
+.results-container.template-one {
+    grid-template-columns: 2fr 1fr; /* Two columns */
+    grid-template-areas:
+        /* Single row: wayfind on left, conversation on right */
+        "wayfind conversation";
+}
+
+/* Hide Answer Section completely in Template 1 */
+.results-container.template-one #answerSection {
+    display: none;
+}
+
+.results-container.template-one #wayfindSection {
+    grid-area: wayfind;
+    opacity: 1;
+    max-height: 2000px; 
+}
+
+.results-container.template-one #conversationSection {
+    grid-area: conversation;
+    /* Ensure sticky positioning applies (it should inherit from base .conversation-section) */
+    position: sticky; /* Re-apply or ensure inheritance */
+    top: 110px; 
+    max-height: calc(100vh - 130px); 
+    height: calc(100vh - 130px);
+}
+
+/* Template Two: Direct Answer and Related Results stacked with Conversation to the right */
+.results-container.template-two {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+        "answer conversation"
+        "wayfind conversation";
+}
+
+.results-container.template-two #answerSection {
+    grid-area: answer;
+    margin-bottom: 0;
+}
+
+.results-container.template-two #wayfindSection {
+    grid-area: wayfind;
+}
+
+.results-container.template-two #conversationSection {
+    grid-area: conversation;
+}
+
+/* Template Three: Direct Answer and Conversation in two columns */
+.results-container.template-three {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+        "answer conversation"
+        /* Add wayfind area even if hidden */
+        "wayfind conversation"; 
+     grid-template-rows: auto auto;
+}
+
+.results-container.template-three #answerSection {
+    grid-area: answer;
+    /* Ensure it's visible */
+    opacity: 1;
+    max-height: 2000px; /* Or appropriate max-height */
+}
+
+/* Hide Wayfind Section in Template 3 using transitions */
+.results-container.template-three #wayfindSection {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-width: 0;
+    /* Removed display: none */
+}
+
+.results-container.template-three #conversationSection {
+    grid-area: conversation;
+    grid-row: 1 / 3; /* Span both rows */
+}
+
+/* Responsive adjustments for templates */
+@media (max-width: 768px) {
+    .results-container.template-one,
+    .results-container.template-two,
+    .results-container.template-three {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-container.template-one {
+        grid-template-areas:
+            "wayfind"
+            "conversation";
+    }
+    
+    .results-container.template-two {
+        grid-template-areas:
+            "answer"
+            "wayfind"
+            "conversation";
+    }
+    
+    .results-container.template-three {
+        grid-template-areas:
+            "answer"
+            "conversation";
+    }
+}
+
+/* Common Styles for Result Sections */
+.results-section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+}
+
+.section-title {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title i {
+    color: var(--primary-color);
+}
+
+/* Specific color for conversation section title icon */
+.conversation-section .section-title i {
+    color: #805ad5; /* Purple */
+}
+
+/* 1. Answer Section Styles */
+.answer-section {
+    border-left: 4px solid var(--primary-color);
+    background-color: var(--primary-light);
+    transition: all 0.6s ease-in-out, max-height 0.6s ease, padding 0.6s ease, margin 0.6s ease, border-width 0.6s ease, opacity 0.6s ease;
+    overflow: hidden;
+    max-height: 2000px;
+    opacity: 1;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+/* Confidence Badge */
+.confidence-badge {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-weight: 600;
+    background-color: var(--primary-color);
+    color: white;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.answer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.5s ease-in-out;
+}
+
+.answer-highlight {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.5s ease;
+    border-left: 0px solid var(--primary-color);
+}
+
+/* Answer text paragraphs with transition states */
+.basic-answer {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    transition: all 0.4s ease;
+}
+
+.expanded-answer, .detailed-answer {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.6s ease, margin 0.6s ease;
+}
+
+.answer-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 15px;
+}
+
+.answer-source a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.answer-accuracy {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Quick actions section */
+.quick-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    transition: all 0.5s ease;
+}
+
+.action-btn {
+    padding: 8px 16px;
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.action-btn.primary-action {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* 2. Wayfind Section Styles */
+.wayfind-section {
+    flex-grow: 1;
+    padding-bottom: 20px; 
+    /* Add max-height and transitions for smooth collapse/expand */
+    max-height: 2000px; /* Default large max-height */
+    overflow: hidden; /* Needed for max-height transition */
+    transition: opacity 0.6s ease, transform 0.6s ease, max-height 0.6s ease, padding 0.6s ease, margin 0.6s ease, border-width 0.6s ease;
+    border-width: 0; /* Ensure border is part of transition */
+    border-style: solid;
+    border-color: transparent;
+}
+
+.wayfind-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Remove gap, use margin on items */
+    margin-bottom: 20px;
+}
+
+.wayfind-item {
+    /* Remove card styles */
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 20px; /* Space between link groups */
+    display: flex; /* Change back to flex to allow icon */
+    align-items: flex-start; /* Align icon and text to top */
+    gap: 12px; /* Add gap between icon and content */
+    cursor: default;
+}
+
+.wayfind-item:hover {
+    /* Remove hover effect */
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.wayfind-icon {
+    display: flex; /* Show the icon again */
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    width: 36px; /* Make icon slightly smaller */
+    height: 36px;
+    min-width: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px; /* Adjust radius */
+    font-size: 1rem; /* Adjust icon size */
+    margin-top: 3px; /* Align with first line of text */
+}
+
+.wayfind-content {
+    flex-grow: 1;
+    padding-top: 0; /* Ensure no extra padding */
+}
+
+.wayfind-content h5 {
+    font-size: 1.1rem;
+    color: var(--primary-color); /* Link color */
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; /* To allow hover effect */
+}
+
+.wayfind-content h5:hover {
+    text-decoration: underline;
+}
+
+.wayfind-content p {
+    color: var(--text-light);
+    font-size: 0.9rem; /* Slightly smaller description */
+    margin-bottom: 5px;
+}
+
+.wayfind-meta {
+    display: none; /* Hide the tag/rating row */
+}
+
+/* 3. Conversation Section Styles */
+.conversation-section {
+    border-left: 4px solid #805ad5;
+    background-color: #f8f7fc;
+    position: sticky;
+    top: 110px; /* Account for header and confidence controls */
+    max-height: calc(100vh - 130px); /* Fill browser height minus header space */
+    align-self: flex-start; /* Stick to top of grid area */
+    transition: max-height 0.2s ease, opacity 0.4s ease, transform 0.4s ease;
+    display: flex; 
+    flex-direction: column; /* Stack title and container vertically */
+    padding: 25px; /* Apply padding to the main section now */
+}
+
+/* Adjust the grid templates to accommodate the floating conversation section */
+.results-container.template-one #conversationSection,
+.results-container.template-two #conversationSection,
+.results-container.template-three #conversationSection {
+    height: calc(100vh - 130px);
+    margin-bottom: 30px;
+}
+
+/* Inner container: Manages vertical flex layout */
+.conversation-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Grow to fill space below title */
+    /* Removed width/height: 100%, now managed by flex */
+    padding: 0; /* Reset padding, parent section has it */
+    gap: 15px; /* Adjust gap between elements */
+    min-height: 0; /* Prevent flex overflow issues */
+}
+
+/* Static Header within the chat */
+.conversation-section .section-title {
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-bottom: 15px; /* Add space below title */
+}
+
+/* Scrollable History Area */
+.conversation-history {
+    flex-grow: 1; /* Takes up available space */
+    overflow-y: auto; /* ONLY this part scrolls */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-right: 5px; /* Space for scrollbar */
+    min-height: 50px; /* Ensure it has some minimum height */
+}
+
+/* Static Suggested Queries Area */
+.suggested-queries {
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Static Input Area at the bottom */
+.query-input {
+    flex-shrink: 0; /* Prevent shrinking */
+    display: flex;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+    padding: 15px 0 0 0;
+    margin: 0; /* Reset margin */
+}
+
+.conversation-query {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.query-icon {
+    background-color: #805ad5;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.query-text {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.suggested-queries h5 {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 12px;
+}
+
+.query-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.suggestion-btn {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.suggestion-btn:hover {
+    background-color: #f0f4f9;
+    border-color: #805ad5;
+    color: #805ad5;
+}
+
+#followUpInput {
+    width: 100%;
+    padding: 12px 15px;
+    padding-right: 45px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: white;
+}
+
+#followUpInput:focus {
+    outline: none;
+    border-color: #805ad5;
+    box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.2);
+}
+
+#askFollowUpBtn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(calc(-50% + 6px));
+    background-color: transparent;
+    color: #805ad5;
+    border: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.2rem;
+}
+
+#askFollowUpBtn:hover {
+    background-color: transparent;
+    color: #6b46c1; /* Darker purple on hover */
+}
+
+/* Source previews section */
+.source-previews {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease, opacity 0.6s ease, margin 0.6s ease;
+    margin-top: 0;
+}
+
+.source-previews h6 {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.source-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.source-tile {
+    display: flex;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    gap: 12px;
+    align-items: center;
+}
+
+.source-icon {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+.source-info {
+    flex-grow: 1;
+}
+
+.source-info h5 {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    margin-bottom: 3px;
+}
+
+.source-info p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 5px;
+}
+
+/* Confidence Level Style Changes */
+/* Low Confidence (0-30%) */
+.low-confidence .answer-highlight {
+    border-left-width: 0px;
+}
+
+.low-confidence .expanded-answer,
+.low-confidence .detailed-answer,
+.low-confidence .source-previews {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+}
+
+/* Medium Confidence (30-70%) */
+.medium-confidence .answer-highlight {
+    border-left-width: 3px;
+}
+
+.medium-confidence .expanded-answer {
+    max-height: 200px;
+    opacity: 1;
+    margin-bottom: 15px;
+}
+
+.medium-confidence .confidence-badge {
+    opacity: 0.7;
+    transform: translateY(0);
+    background-color: #f59e0b; /* Orange for medium confidence */
+}
+
+/* High Confidence (70-100%) */
+.high-confidence .answer-highlight {
+    border-left-width: 5px;
+}
+
+.high-confidence .expanded-answer,
+.high-confidence .detailed-answer {
+    max-height: 300px;
+    opacity: 1;
+    margin-bottom: 15px;
+}
+
+.high-confidence .confidence-badge {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.high-confidence .source-previews {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .confidence-controls {
+        flex-direction: column;
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .confidence-slider {
+        width: 100%;
+    }
+    
+    .site-header {
+        margin-top: 80px;
+    }
+    
+    .wayfind-item {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .wayfind-icon {
+        margin: 0 auto;
+    }
+    
+    .action-btn {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+/* Simplified Search Area */
+.simplified-search {
+    margin: 20px auto 30px;
+    text-align: left;
+}
+
+.simplified-search h2 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.simplified-search .search-input-wrapper {
+    max-width: 700px;
+    margin: 0 auto 0 0;
+    position: relative;
+}
+
+/* Typeahead Suggestions Styles */
+#suggestionsContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: 4px;
+    box-shadow: var(--card-shadow);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none; /* Hide by default */
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: var(--primary-light);
+}
+
+.suggestion-item .term {
+    font-weight: 500;
+}
+
+.suggestion-item .description {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-left: 8px;
+}
+
+.suggestion-item .ticker-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.suggestion-item .price {
+    font-weight: 500;
+}
+
+.suggestion-item .change {
+    font-size: 0.9rem;
+}
+
+.suggestion-item .change.positive {
+    color: var(--primary-color);
+}
+
+.suggestion-item .change.negative {
+    color: #e53e3e;
+}
+
+.highlighted {
+    background-color: var(--primary-light);
+}
+
+/* Personalized Suggestion Item Styles */
+.suggestion-item-personal {
+    display: flex; /* Use flexbox */
+    align-items: center; /* Vertically align items in the main row */
+    padding: 10px 15px; /* Consistent padding */
+    gap: 10px; /* Consistent gap */
+    /* Removed position: relative */
+}
+
+.suggestion-item-personal i {
+    margin-right: 0; /* Reset margin if needed */
+    flex-shrink: 0; 
+}
+
+.suggestion-item-personal .personal-content-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack text lines if needed */
+    align-items: flex-start;
+    flex-grow: 1;
+    overflow: hidden; /* Hide overflow */
+}
+
+.suggestion-item-personal .personal-text {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%; 
+    /* Removed specific width calc if present */
+}
+
+.suggestion-item-personal .personal-details {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-left: auto; /* Push to the right */
+    white-space: nowrap;
+    position: static; /* Ensure static positioning */
+    transform: none; 
+    flex-shrink: 0; 
+}
+
+/* Personal Account Suggestion Hover Expand Feature - REMOVED */
+/* Styles for .personal-actions-details, .account-detail-item, .action-buttons, .action-btn are removed */
+/* Hover effect on .suggestion-item-personal:hover .personal-actions-details is removed */
+
+/* Ticker Suggestion Item Styles */
+.suggestion-item-ticker {
+    padding: 8px 15px;
+    gap: 8px;
+}
+
+.suggestion-item-ticker .ticker-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    margin-left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.suggestion-item-ticker .ticker-symbol {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.suggestion-item-ticker .ticker-name {
+    font-size: 0.85rem;
+    color: var(--secondary-text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-item-ticker .ticker-financials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.9rem;
+    min-width: 60px;
+}
+
+.suggestion-item-ticker .ticker-price {
+    font-weight: 500;
+}
+
+/* Make search results closer to search bar */
+.results-container {
+    margin-top: 0;
+}
+
+/* Hover state for all suggestion types */
+.suggestion-item:hover,
+.suggestion-item-ticker:hover,
+.suggestion-item-personal:hover {
+    background-color: var(--primary-light); /* Light green background on hover */
+}
+
+.suggestion-item.active,
+.suggestion-item-ticker.active,
+.suggestion-item-personal.active {
+    background-color: var(--primary-light); /* Match active state with hover */
+}
+
+/* Wireframe Mode Styles */
+body.wireframe-mode .results-section > *:not(.section-title) {
+    /* Hide all direct children of results sections except the title */
+    display: none;
+}
+
+body.wireframe-mode .results-section {
+    /* Style sections as simple boxes */
+    border: 2px dashed var(--text-light); /* Darker dashed border */
+    background-color: white; /* White background for contrast */
+    box-shadow: none;
+    padding: 15px; /* Reduce padding */
+    min-height: 60px; /* Ensure title is visible */
+}
+
+body.wireframe-mode .results-section .section-title {
+    /* Ensure title is visible and centered */
+    margin-bottom: 0; 
+    color: var(--text-light);
+    font-weight: normal;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+body.wireframe-mode .results-section .section-title i {
+    /* Optional: Hide icons in wireframe mode */
+    display: none;
+}
+
+body.wireframe-mode #conversationSection {
+    /* Adjust conversation section specific overrides if needed */
+    border-left: 2px dashed var(--text-light); /* Match border style */
+    position: sticky; /* Keep sticky if desired, or make static */
+    background-color: white; /* Match background */
+}
+
+body.wireframe-mode .confidence-badge {
+    /* Hide confidence badge */
+    display: none;
+}
+
+/* Style the toggle button when active */
+#wireframeToggleBtn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-dark);
+}
+
+body.wireframe-mode .site-header {
+    border: 2px dashed var(--text-light);
+    background-color: white;
+    box-shadow: none;
+    border-top: none; /* Remove top border if present */
+    border-left: none; 
+    border-right: none;
+    margin-top: 40px; /* Restore top margin to stay below confidence bar */
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: auto; /* Let height adjust */
+}
+
+body.wireframe-mode .site-header .header-container {
+    height: auto;
+    min-height: 40px; /* Ensure some height */
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+body.wireframe-mode .logo {
+    position: relative; /* Needed for pseudo-element positioning if used */
+}
+
+body.wireframe-mode .logo h1 {
+    font-size: 0 !important; /* Hide original text by making font size zero */
+    color: transparent; /* Further ensure it's hidden */
+}
+
+/* Add placeholder text for the logo */
+body.wireframe-mode .logo::before {
+    content: "Site Name";
+    font-size: 1.2rem; 
+    color: var(--text-light);
+    font-weight: 600;
+    display: block;
+    padding: 5px 0; /* Add some padding */
+}
+
+body.wireframe-mode .simplified-search {
+    border: 2px dashed var(--text-light);
+    background-color: white;
+    padding: 15px 20px; /* 15px top/bottom, 20px left/right */
+    margin-bottom: 15px; 
+    position: relative; 
+}
+
+/* Add placeholder text for the page title */
+body.wireframe-mode .simplified-search::before {
+    content: "Page Title";
+    font-size: 1.5rem; 
+    color: var(--text-light);
+    font-weight: 600;
+    display: block;
+    /* Revert to margin for spacing */
+    margin-bottom: 10px;
+    padding: 0; /* Remove padding */
+}
+
+body.wireframe-mode .simplified-search h2 {
+    /* Hide the original "Results" title */
+    display: none;
+}
+
+body.wireframe-mode #searchInput {
+    border: 1px solid var(--text-light); /* Simple border */
+    box-shadow: none;
+    background-color: var(--bg-color);
+}
+
+body.wireframe-mode #searchInput:focus {
+    box-shadow: none;
+    border-color: var(--text-light);
+}
+
+body.wireframe-mode #searchButton {
+    display: none; /* Hide search icon button */
+}
+
+body.wireframe-mode .suggestions-container {
+    border: 2px dashed var(--text-light);
+    box-shadow: none;
+    background-color: white;
+    border-top: 1px dashed var(--text-light); /* Keep top separator */
+    position: absolute; /* Ensure it remains positioned */
+    top: calc(100% - 2px); /* Adjust position slightly for border */
+}
+
+body.wireframe-mode .suggestion-item, 
+body.wireframe-mode .suggestion-item-ticker, 
+body.wireframe-mode .suggestion-item-personal {
+    border: 1px solid var(--bg-color); /* Lighter internal borders */
+    background-color: white;
+    color: var(--text-light);
+}
+
+body.wireframe-mode .suggestion-item:hover, 
+body.wireframe-mode .suggestion-item-ticker:hover, 
+body.wireframe-mode .suggestion-item-personal:hover, 
+body.wireframe-mode .suggestion-item.active, 
+body.wireframe-mode .suggestion-item-ticker.active, 
+body.wireframe-mode .suggestion-item-personal.active {
+    background-color: var(--bg-color); /* Use light grey for hover/active */
+}
+
+body.wireframe-mode .suggestion-item i, 
+body.wireframe-mode .suggestion-item-personal i, 
+body.wireframe-mode .suggestion-item-ticker i {
+    display: none; /* Hide icons */
+}
+
+body.wireframe-mode .suggestion-item mark {
+    color: var(--text-color); /* Plainer highlight */
+    font-weight: normal;
+}
+
+/* Make Answer section fill height in Wireframe + High Confidence */
+body.wireframe-mode .results-container.template-three #answerSection {
+    min-height: calc(100vh - 150px); /* Approximate available height */
+    height: auto; /* Allow it to grow if needed, but ensure min height */
+    /* Override general wireframe min-height */
+}
+
+/* Visualization Styles */
+.visualization-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: var(--card-shadow);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.data-table th:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.data-table tr:hover {
+    background-color: var(--primary-light);
+}
+
+/* Highcharts Customization */
+.highcharts-container {
+    font-family: 'Inter', sans-serif !important;
+}
+
+.highcharts-title {
+    font-weight: 600 !important;
+    color: var(--secondary-color) !important;
+}
+
+.highcharts-axis-title {
+    font-weight: 500 !important;
+}
+
+.highcharts-tooltip {
+    font-size: 0.9rem !important;
+}
+
+/* Visualization Controls */
+.visualization-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.visualization-type-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background: white;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.visualization-type-btn:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.visualization-type-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.visualization-container {
+    padding: 20px;
+}
+
+#stockChart {
+    width: 100%;
+    height: 400px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .visualization-container {
+        padding: 15px;
+    }
+    
+    .data-table {
+        font-size: 0.9rem;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px;
+    }
+}
+
+.ticker-loading {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.ticker-error {
+    color: #ef4444;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.ticker-financials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 100px;
+}
+
+.stock-details {
+    padding: 20px;
+}
+
+.stock-header {
+    margin-bottom: 20px;
+}
+
+.stock-header h5 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.stock-name {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.stock-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.metric-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.metric-label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.metric-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.metric-value.positive {
+    color: #10b981;
+}
+
+.metric-value.negative {
+    color: #ef4444;
+}
+
+.stock-chart {
+    margin-top: 30px;
+}
+
+.chart-container {
+    height: 400px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stock-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .metric-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .metric {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+/* === New Home Page Styles (Google Inspired) === */
+
+.home-container {
+    max-width: 600px; /* Max width like Google search */
+    width: 100%; /* Take full width up to max-width */
+    margin: auto; /* Center horizontally and vertically */
+    padding: 20px 24px; /* Top/bottom padding + 24px side page margins */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1; /* Allow container to grow */
+    justify-content: center; /* Center content vertically */
+}
+
+.home-logo {
+    font-size: 2.5rem; /* Larger logo text */
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+.home-logo .theta {
+    color: var(--primary-color);
+}
+
+.home-logo .assistant {
+     color: var(--text-light);
+}
+
+.home-search-wrapper {
+    position: relative;
+    width: 100%; /* Take full width of container */
+    margin-bottom: 30px;
+}
+
+#homeSearchInput {
+    width: 100%;
+    padding: 14px 50px 14px 20px; /* Pad left for text, right for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 12px !important; /* Updated corner radius, added !important */
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+#homeSearchInput:hover {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+#homeSearchInput:focus {
+    outline: none;
+    border-color: var(--border-color); /* Keep border subtle on focus */
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+#homeSearchButton {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    padding: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#homeSearchButton:hover {
+    color: var(--primary-color);
+}
+
+/* Suggestions container - hidden by default */
+#homeSuggestionsContainer {
+    /* Inherits base styles from #suggestionsContainer */
+    /* Ensure it's positioned correctly relative to this input */
+    top: calc(100% + 5px); /* Position below input */
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.home-icebreakers {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    gap: 15px; /* Space between cards */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
+    width: 100%; /* Take full width */
+}
+
+.icebreaker-link {
+    background-color: #f8f9fa; /* Light grey background */
+    color: var(--secondary-color);
+    border: 1px solid #f8f9fa; /* Match background for seamless look */
+    border-radius: 6px;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex; /* Use inline-flex for icon+text */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icebreaker-link:hover {
+    border-color: var(--border-color); /* Show border on hover */
+    background-color: #f1f3f4;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.icebreaker-link i {
+    color: var(--primary-color); /* Color the icon */
+    font-size: 1rem;
+}
+
+/* --- Responsive Adjustments for Home Page --- */
+
+@media (max-width: 650px) {
+    /* Adjust padding slightly on medium screens */
+    .home-container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .home-logo {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Stack icebreakers vertically on small screens */
+    .home-icebreakers {
+        flex-direction: column; /* Stack vertically */
+        align-items: stretch; /* Make cards full width */
+        gap: 10px;
+    }
+
+    .icebreaker-link {
+        justify-content: center; /* Center icon and text within card */
+        padding: 14px 18px; /* Slightly more vertical padding */
+    }
+
+    .home-logo {
+        font-size: 2rem;
+        margin-bottom: 25px;
+    }
+
+    #homeSearchInput {
+        padding: 12px 45px 12px 18px;
+    }
+}
+
+/* End of New Home Page Styles */
+
+/* Remove the extra brace that was likely added here */ 

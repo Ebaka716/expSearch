@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theta Assistant - Search</title>
+    <link rel="stylesheet" href="expSearch.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Removed Highcharts/D3 for simplicity on home page -->
+</head>
+<body>
+
+    <div class="home-container">
+        <div class="home-logo">
+            <!-- You can replace this with an <img> tag if you have a logo file -->
+             <span class="theta">Theta</span><span class="assistant">Assistant</span>
+        </div>
+
+        <div class="home-search-wrapper">
+            <input type="text" id="homeSearchInput" placeholder="Search Theta Assistant..." autocomplete="off">
+            <button id="homeSearchButton" aria-label="Search"><i class="fas fa-search"></i></button>
+            <!-- Suggestions container for potential future use -->
+            <div id="homeSuggestionsContainer" class="suggestions-container"></div> 
+        </div>
+
+        <div class="home-icebreakers">
+            <a href="expSearch.html?query=Compare+Savings+Rates" class="icebreaker-link">
+                <i class="fas fa-percentage"></i>
+                <span>Compare Rates</span>
+            </a>
+            <a href="expSearch.html?query=Explain+ETFs" class="icebreaker-link">
+                 <i class="fas fa-chart-line"></i>
+                 <span>Learn Investing</span>
+            </a>
+            <a href="expSearch.html?query=Find+an+Advisor" class="icebreaker-link">
+                 <i class="fas fa-user-tie"></i>
+                 <span>Find an Advisor</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="expSearch.js"></script> 
+</body>
+</html> 

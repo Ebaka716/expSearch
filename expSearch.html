@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Services Search</title>
+    <link rel="stylesheet" href="expSearch.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add Highcharts -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+</head>
+<body>
+    <!-- Confidence Slider Interface (outside main UI) -->
+    <div id="confidenceControls" class="confidence-controls">
+        <div class="confidence-label">Confidence Level:</div>
+        <input type="range" id="confidenceSlider" min="0" max="100" value="50" class="confidence-slider">
+        <div class="confidence-value"><span id="confidenceValue">50</span>%</div>
+        <button id="wireframeToggleBtn" class="template-btn">Wireframe</button>
+    </div>
+
+    <header class="site-header">
+        <!-- Applying container class directly for consistent width -->
+        <div class="header-container container"> 
+            <div class="logo">
+                <h1>Theta Corp</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Simplified Search Area -->
+        <div class="simplified-search container">
+             <h2>Results</h2>
+            <div class="search-input-wrapper">
+                <input type="text" id="searchInput" placeholder="Search for financial services, products, or advisors..." autocomplete="off">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+                <div id="suggestionsContainer" class="suggestions-container"></div>
+            </div>
+        </div>
+
+        <!-- Multi-section results area -->
+        <div class="results-container container template-two"> 
+            <!-- Results Header was removed -->
+            
+            <!-- 1. Answer Section (High Confidence) -->
+            <section id="answerSection" class="results-section answer-section">
+                <h4 class="section-title">
+                    <i class="fas fa-check-circle"></i> Answer
+                    <span class="confidence-badge">Live Data</span>
+                </h4>
+                <div class="answer-content">
+                    <div class="answer-highlight">
+                        <h5 id="stockSymbol">What is a high-yield savings account?</h5>
+                        
+                        <!-- Default Content Area -->
+                        <div id="defaultAnswerContent"> 
+                            <div class="basic-answer">
+                                A high-yield savings account is a type of deposit account that pays a higher interest rate than a standard savings account.
+                            </div>
+                            <div class="expanded-answer">
+                                These accounts typically offer 10-25 times the national average of a standard savings account interest rate, allowing your money to grow faster while remaining liquid and FDIC-insured.
+                            </div>
+                            <div class="detailed-answer">
+                                Most high-yield savings accounts are offered by online banks, which can offer higher rates due to their lower overhead costs compared to traditional brick-and-mortar banks. Interest is typically compounded daily and paid monthly. While rates can fluctuate based on the Federal Reserve\'s decisions, they generally remain higher than standard savings accounts.
+                            </div>
+                            <!-- Add chart container for savings rates here if needed -->
+                            <div id="savingsRatesChart" style="margin-top: 20px; display: none;"></div> 
+                        </div>
+
+                        <!-- Stock Details Area (Initially Hidden) -->
+                        <div id="stockDetails" class="stock-details" style="display: none;"> 
+                            <div class="stock-header">
+                                <div id="stockName" class="stock-name"></div>
+                            </div>
+                            <div class="stock-metrics">
+                                <div class="metric-group">
+                                    <div class="metric">
+                                        <span class="metric-label">Current Price</span>
+                                        <span id="stockPrice" class="metric-value">-</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Change</span>
+                                        <span id="stockChange" class="metric-value">-</span>
+                                    </div>
+                                </div>
+                                <div class="metric-group">
+                                    <div class="metric">
+                                        <span class="metric-label">Open</span>
+                                        <span id="stockOpen" class="metric-value">-</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Volume</span>
+                                        <span id="stockVolume" class="metric-value">-</span>
+                                    </div>
+                                </div>
+                                <div class="metric-group">
+                                    <div class="metric">
+                                        <span class="metric-label">High</span>
+                                        <span id="stockHigh" class="metric-value">-</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Low</span>
+                                        <span id="stockLow" class="metric-value">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stock-chart">
+                                <div id="stockChart" class="chart-container"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Source Previews (Visible in High Confidence - Moved outside the white card) -->
+                    <div class="source-previews">
+                        <h6>Source Previews</h6>
+                        <div class="source-tiles">
+                            <div class="source-tile">
+                                <div class="source-icon"><i class="fas fa-file-alt"></i></div>
+                                <div class="source-info">
+                                    <h5>Source Document 1 Title</h5>
+                                    <p>Brief description or snippet from source 1...</p>
+                                </div>
+                            </div>
+                            <div class="source-tile">
+                                <div class="source-icon"><i class="fas fa-external-link-alt"></i></div>
+                                <div class="source-info">
+                                    <h5>External Article Link</h5>
+                                    <p>Summary of the linked external article...</p>
+                                </div>
+                            </div>
+                            <div class="source-tile">
+                                <div class="source-icon"><i class="fas fa-database"></i></div>
+                                <div class="source-info">
+                                    <h5>Internal Data Source</h5>
+                                    <p>Description of the internal data used...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2. Wayfind Section (Standard Results) -->
+            <section id="wayfindSection" class="results-section wayfind-section">
+                 <h4 class="section-title"><i class="fas fa-search"></i> Related Results</h4>
+                <div class="wayfind-list">
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <div class="wayfind-content">
+                            <h5>High-Yield Savings Account Comparison</h5>
+                            <p>Find and compare the best high-yield savings accounts from top online banks with competitive rates and no monthly fees.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-percentage"></i></div>
+                        <div class="wayfind-content">
+                            <h5>Current Interest Rates on Savings</h5>
+                            <p>Track the latest interest rates for different savings products and see how they compare to historical averages.</p>
+                       </div>
+                    </div>
+                    
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="wayfind-content">
+                            <h5>FDIC Insurance Explained</h5>
+                            <p>Learn how FDIC insurance protects your deposits and what limits apply to different account types.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <div class="wayfind-content">
+                            <h5>Moving Money Between Accounts</h5>
+                            <p>Tips and strategies for efficiently transferring funds between your various financial accounts.</p>
+                        </div>
+                    </div>
+
+                    <!-- Added Placeholder Items -->
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 5</h5><p>Description for placeholder result number five.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 6</h5><p>Description for placeholder result number six.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 7</h5><p>Description for placeholder result number seven.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 8</h5><p>Description for placeholder result number eight.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 9</h5><p>Description for placeholder result number nine.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 10</h5><p>Description for placeholder result number ten.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 11</h5><p>Description for placeholder result number eleven.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 12</h5><p>Description for placeholder result number twelve.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 13</h5><p>Description for placeholder result number thirteen.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 14</h5><p>Description for placeholder result number fourteen.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 15</h5><p>Description for placeholder result number fifteen.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 16</h5><p>Description for placeholder result number sixteen.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 17</h5><p>Description for placeholder result number seventeen.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 18</h5><p>Description for placeholder result number eighteen.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 19</h5><p>Description for placeholder result number nineteen.</p></div>
+                    </div>
+                    <div class="wayfind-item">
+                        <div class="wayfind-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="wayfind-content"><h5>Placeholder Result 20</h5><p>Description for placeholder result number twenty.</p></div>
+                    </div>
+                </div>
+                 <div class="pagination">
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+            
+            <!-- 3. Conversation Area (Query Refinement) -->
+             <section id="conversationSection" class="results-section conversation-section">
+                <h4 class="section-title"><i class="fas fa-comments"></i> Refine</h4>
+                <div class="conversation-container">
+                    <div class="conversation-history">
+                        <div class="conversation-query">
+                            <span class="query-icon"><i class="fas fa-search"></i></span>
+                            <span class="query-text">High-yield savings account</span>
+                        </div>
+                    </div>
+                     <div class="suggested-queries">
+                        <h5>Ask a follow-up question:</h5>
+                        <div class="query-suggestions">
+                            <button class="suggestion-btn">What are the current best rates?</button>
+                            <button class="suggestion-btn">Are there minimum balance requirements?</button>
+                        </div>
+                    </div>
+                     <div class="query-input">
+                        <input type="text" id="followUpInput" placeholder="Type your follow-up question...">
+                        <button id="askFollowUpBtn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="expSearch.js"></script>
+</body>
+</html> 
