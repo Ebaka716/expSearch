@@ -17,6 +17,7 @@
         </div>
 
         <div class="home-search-wrapper">
+            <!-- Removed attach button -->
             <input type="text" id="homeSearchInput" placeholder="Search Theta Assistant..." autocomplete="off">
             <button id="homeSearchButton" aria-label="Search"><i class="fas fa-search"></i></button>
             <!-- Suggestions container for potential future use -->
@@ -36,6 +37,41 @@
                  <i class="fas fa-user-tie"></i>
                  <span>Find an Advisor</span>
             </a>
+        </div>
+    </div>
+
+    <!-- Info Button for Home Page -->
+    <button id="infoButtonHome" class="info-button-home"><i class="fas fa-info-circle"></i></button>
+
+    <!-- Info Modal Structure -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeInfoModal">&times;</span>
+            <h3>Demo Query Guide</h3>
+            <p>This demo showcases different answer types based on your query:</p>
+            <ul>
+                <li><strong>Stock Tickers:</strong> Try <code>AAPL</code>, <code>GOOGL</code>, <code>MSFT</code>, <code>AMZN</code>, or <code>TSLA</code> for live data and charts.</li>
+                <li><strong>Specific Topics:</strong>
+                    <ul>
+                        <li>Keywords like "compare rates" show a savings rate chart.</li>
+                        <li>Keywords like "invest" or "stock" give general investment info.</li>
+                        <li>Keywords like "crypto" or "bitcoin" explain cryptocurrency.</li>
+                        <li>Keywords like "loan" or "mortgage" explain mortgages.</li>
+                    </ul>
+                </li>
+                <li><strong>Default Topic:</strong> Searching "high-yield savings account" or leaving the search empty shows detailed HYSA info.</li>
+                <li><strong>Other Queries:</strong> Any other search term will result in a generic placeholder answer.</li>
+            </ul>
+            <hr style="margin: 20px 0;">
+            <h4>Typeahead Suggestions</h4>
+            <p>As you type in the search bar, you'll see different kinds of suggestions:</p>
+             <ul>
+                <li><strong>Financial Terms:</strong> Basic matching terms (e.g., typing "sto" suggests "Stocks").</li>
+                <li><strong>Stock Tickers:</strong> If you type 1-5 uppercase letters (e.g., <code>AA</code>), matching stock tickers appear with live price/change data.</li>
+                <li><strong>Personalized (Example):</strong> If you type 3 or more characters, an example personalized suggestion (like checking an account balance) may appear.</li>
+            </ul>
+            <hr style="margin: 20px 0;">
+            <p>Use the Confidence Slider (on results page) to see how the layout changes!</p>
         </div>
     </div>
 

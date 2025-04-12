@@ -882,6 +882,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // --- Modal Logic ---
+    const infoModal = document.getElementById('infoModal');
+    const closeInfoModalBtn = document.getElementById('closeInfoModal');
+    const infoButtonHome = document.getElementById('infoButtonHome');
+    const infoButtonResults = document.getElementById('infoButtonResults');
+
+    const openModal = () => {
+        if (infoModal) infoModal.style.display = 'block';
+    };
+
+    const closeModal = () => {
+        if (infoModal) infoModal.style.display = 'none';
+    };
+
+    // Event listeners for buttons
+    if (infoButtonHome) infoButtonHome.addEventListener('click', openModal);
+    if (infoButtonResults) infoButtonResults.addEventListener('click', openModal);
+
+    // Event listener for close button
+    if (closeInfoModalBtn) closeInfoModalBtn.addEventListener('click', closeModal);
+
+    // Close modal if clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === infoModal) {
+            closeModal();
+        }
+    });
+
     // --- Initialize ---
     // Initialize controls and search logic. Some parts might only apply to one page,
     // but the functions internally check for element existence.
