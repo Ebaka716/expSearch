@@ -14,14 +14,18 @@
     <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
 </head>
 <body>
-    <!-- Confidence Slider Interface (outside main UI) -->
-    <div id="confidenceControls" class="confidence-controls">
-        <div class="confidence-label">Confidence Level:</div>
-        <input type="range" id="confidenceSlider" min="0" max="100" value="50" class="confidence-slider">
-        <div class="confidence-value"><span id="confidenceValue">50</span>%</div>
-        <button id="wireframeToggleBtn" class="template-btn">Wireframe</button>
-        <button id="infoButtonResults" class="template-btn info-button-results"><i class="fas fa-info-circle"></i> Info</button>
-    </div>
+    <!-- Controls Header -->
+    <header class="controls-header">
+        <div class="container">
+            <div id="confidenceControls" class="confidence-controls">
+                <div class="confidence-label">Confidence Level:</div>
+                <input type="range" id="confidenceSlider" min="0" max="100" value="50" class="confidence-slider">
+                <div class="confidence-value"><span id="confidenceValue">50</span>%</div>
+                <button id="wireframeToggleBtn" class="template-btn">Wireframe</button>
+                <button id="infoButtonResults" class="template-btn info-button-results"><i class="fas fa-info-circle"></i> Info</button>
+            </div>
+        </div>
+    </header>
 
     <header class="site-header">
         <!-- Applying container class directly for consistent width -->
